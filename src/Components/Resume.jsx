@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useResumeStore } from "../../Store/Resume";
 import html2pdf from "html2pdf.js";
 import { useParams } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
 
 function Resume() {
   const resumeRef = useRef();
@@ -66,7 +67,14 @@ function Resume() {
           <h3 className="text-lg font-semibold sub-heading">
             Career Objective
           </h3>
-          <p className="text-[1rem] font-medium">
+          <Tooltip id="edit" />
+          <p
+            className="text-[1rem] font-medium outline-none focus:ring-2"
+            contentEditable="true"
+            title="Editable"
+            data-tooltip-id="edit"
+            data-tooltip-content="click to edit"
+          >
             To make contribution in the organization with best of my ability and
             also to develop new skills during the interaction to achieve new
             heights.
