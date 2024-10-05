@@ -35,7 +35,7 @@ function Resume() {
   };
 
   return (
-    <div className="p-6 bg-gray-100 ">
+    <div className="p-6 bg-gray-100 font-openSans">
       <button
         onClick={handleDownloadPdf}
         className="px-2 py-1 mb-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 active:scale-95"
@@ -46,7 +46,12 @@ function Resume() {
         ref={resumeRef}
         className="max-w-3xl px-4 py-6 mx-auto bg-white rounded-lg"
       >
-        <h1 className="mb-4 text-[2rem] font-bold text-center tracking-wide">
+        <h1
+          className="mb-4 text-[2rem] font-bold text-center tracking-wide outline-none focus:ring-2"
+          contentEditable="true"
+          data-tooltip-id="edit"
+          data-tooltip-content="click to edit"
+        >
           {candidate.heading}
         </h1>
         <h2 className="text-2xl font-bold uppercase">{candidate.name}</h2>
@@ -71,7 +76,6 @@ function Resume() {
           <p
             className="text-[1rem] font-medium outline-none focus:ring-2"
             contentEditable="true"
-            title="Editable"
             data-tooltip-id="edit"
             data-tooltip-content="click to edit"
           >
