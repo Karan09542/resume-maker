@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
+import { GoDownload } from "react-icons/go";
 import {
   useChangeResumesObjsStore,
   useResumeIdStore,
@@ -9,6 +10,8 @@ import {
 } from "../../Store/Resume";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
+import PdfResume from "./react-pdf/PdfResume";
+import { pdf } from "@react-pdf/renderer";
 
 function SideBar() {
   const [resumesObjs, setResumesObjs] = useState({});
@@ -40,6 +43,19 @@ function SideBar() {
     setIsChangeResumesObjs();
   };
 
+  const handleDownloadResume = async (key) => {
+    const resume = resumesObjs[key];
+    const doc = <PdfResume candidate={resume} />;
+    const asPdf = pdf(doc);
+    const blob = await asPdf.toBlob();
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${resume.name}.pdf`;
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const [show, setShow] = useState(false);
 
   return (
@@ -47,7 +63,7 @@ function SideBar() {
       {!show ? (
         <IoReorderThreeOutline
           size={40}
-          className={`absolute z-10 bg-white border rounded-lg shadow-lg cursor-pointer left-2 top-5 text-rose-500 active:scale-95`}
+          className={`absolute z-10 bg-white border  cursor-pointer left-2 top-2.5 text-rose-500 active:scale-95`}
           onClick={() => setShow(true)}
         />
       ) : (
@@ -82,18 +98,23 @@ scroll-width-thin max-h-[500px] px-5 py-3 bg-white divide-y-2 divide-gray-100"
                         className="px-1 mb-2 font-serif break-all text-ellipsis rounded-lg hover:text-white hover:bg-rose-400 w-fit !max-w-[178px]"
                         title="show resume"
                       >
-                        <Link to={`/resume/${key}`}>{key}</Link>
+                        <Link to={`/pdf-resume/${key}`}>{key}</Link>
                       </p>
-                      <div className="flex gap-3">
+                      <div className="flex gap-3 scale-95">
                         <FaPencil
                           size={36}
-                          className="p-2 text-orange-300 rounded-lg shadow-lg active:scale-95"
+                          className="p-2 text-orange-300 border rounded-lg shadow-lg active:scale-95"
                           onClick={() => handleEditResume(key)}
                         />
                         <MdDelete
                           size={36}
-                          className="p-2 rounded-lg shadow-lg text-rose-500 active:scale-95"
+                          className="p-2 border rounded-lg shadow-lg text-rose-500 active:scale-95"
                           onClick={() => handleDeleteResume(key)}
+                        />
+                        <GoDownload
+                          size={36}
+                          className="p-2 border rounded-lg shadow-lg text-rose-500 active:scale-95"
+                          onClick={() => handleDownloadResume(key)}
                         />
                       </div>
                     </div>

@@ -86,7 +86,7 @@ function Resume() {
         </div>
 
         {candidate?.qualifications && (
-          <div className="mb-4">
+          <div className="mb-4 ">
             <h3 className="text-lg font-semibold sub-heading">
               Academic Qualification
             </h3>

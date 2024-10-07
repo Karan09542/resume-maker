@@ -23,10 +23,7 @@ export const useResumeStore = create((set)=>({
         nationality: "",
         maritalStatus: ""
     },
-    setResume: (data)=> set({resume: data})
-}))
-
-// {
+//     resume: {
 //     heading: "RESUME",
 //     name: "Sambhu",
 //     houseNo: 0,
@@ -45,8 +42,13 @@ export const useResumeStore = create((set)=>({
 //     dob: "0/0/0",
 //     lang: "hindi",
 //     nationality: "india",
-//     maritalStatus: "unmarried"
-// }
+//     maritalStatus: "unmarried",
+//     bhasa: "hindi",
+// },
+
+    setResume: (data)=> set({resume: data})
+}))
+
 
 export const  useChangeResumesObjsStore = create((set)=>({
     isChangeResumesObjs: false,

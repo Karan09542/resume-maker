@@ -9,9 +9,9 @@ import {
   useResumeIdStore,
   useResumeStore,
 } from "../../Store/Resume";
+import Switch from "./Switch";
 
 function ResumeInputs() {
-  const navigate = useNavigate();
   const setResume = useResumeStore((state) => state.setResume);
   const resume = useResumeStore((state) => state.resume);
   const setIsChangeResumesObjs = useChangeResumesObjsStore(
@@ -31,6 +31,7 @@ function ResumeInputs() {
   } = useForm({
     defaultValues: {
       heading: "RESUME",
+      bhasa: "english",
     },
     values: resume,
   });
@@ -79,14 +80,15 @@ function ResumeInputs() {
       toast.error("Please select a resume");
       return;
     }
+
     const resumes = JSON.parse(localStorage.getItem("resumesObjs"));
     delete resumes[resumeId];
     const newResuemId = `${getValues().name}-${Date.now()}`;
     resumes[newResuemId] = getValues();
     localStorage.setItem("resumesObjs", JSON.stringify(resumes));
     setIsChangeResumesObjs();
-    setResumeId(null);
-    toast.success("Resume updated successfully");
+    setResumeId(newResuemId);
+    toast.success(`${resumes[newResuemId].name} Resume updated successfully`);
   };
 
   const { fields, append, remove } = useFieldArray({
@@ -132,24 +134,45 @@ function ResumeInputs() {
     }
     // console.log(resume);
   }, [resume]);
+
+  const [bhasa, setBhasa] = useState("english");
+  const handleResumeLang = (e) => {
+    console.log(typeof e.target.checked);
+    if (e.target.checked) {
+      setBhasa("hindi");
+    } else {
+      setBhasa("english");
+    }
+  };
+
+  useEffect(() => {
+    setValue("bhasa", bhasa);
+  }, [bhasa]);
+
   return (
-    <div className="fixed w-screen h-full py-2 overflow-y-scroll bg-gray-50">
+    <div className="fixed w-screen h-full overflow-y-scroll bg-gray-50">
       <h1
-        className={` font-serif text-4xl text-center ${
-          isWide ? "mb-3" : "mb-10"
+        className={` font-serif text-4xl text-center sticky top-0 z-10 bg-gray-50 ${
+          isWide ? "mb-3" : "mb-0"
         }`}
       >
-        Personal Details
+        <p className="py-3">Personal Details</p>
+        <hr />
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`mx-auto [&>div>input]:mb-3 [&>div>input]:outline-none px-4 ${
+        className={`mx-auto [&>div>input]:mb-3 [&>div>input]:outline-none px-4 py-3 ${
           isWide
             ? "grid max-w-[951px] max-[1375px]:w-[60%] max-[1140px]:w-[70%] max-[980px]:w-[80%] max-[850px]:w-[90%] max-[760px]:w-[100%] grid-cols-3 w-[50%] p-5 gap-x-4 items-center"
             : "max-w-96"
         }`}
       >
+        <div className={isWide ? "col-span-3 w-full mb-2" : "mb-2"}>
+          <Switch onClick={handleResumeLang} />
+        </div>
+
         <input type="text" register={register("heading")} hidden />
+        <input type="text" register={register("bhasa")} hidden />
         <InputField
           register={register("name", {
             required: {
@@ -157,7 +180,7 @@ function ResumeInputs() {
               message: "name is required",
             },
           })}
-          field_name="Enter Your Name *"
+          field_name={bhasa === "hindi" ? "आपका नाम *" : "Enter Your Name *"}
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
         />
         <InputField
@@ -167,12 +190,14 @@ function ResumeInputs() {
               message: "House No. is required",
             },
           })}
-          field_name="House No *"
+          field_name={bhasa === "hindi" ? "घर का नं. *" : "House No *"}
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
         />
         <InputField
           register={register("landmark")}
-          field_name="Landmark / Near by / Gali no."
+          field_name={
+            bhasa === "hindi" ? "जगह *" : "Landmark / Near by / Gali no."
+          }
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
         />
         <InputField
@@ -182,7 +207,7 @@ function ResumeInputs() {
               message: "House No. is required",
             },
           })}
-          field_name="Area / Locality *"
+          field_name={bhasa === "hindi" ? "क्षेत्र *" : "Area / Locality *"}
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
         />
         <InputField
@@ -192,7 +217,7 @@ function ResumeInputs() {
               message: "state is required",
             },
           })}
-          field_name="State *"
+          field_name={bhasa === "hindi" ? "राज्य *" : "State *"}
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
           type="text"
         />
@@ -203,7 +228,7 @@ function ResumeInputs() {
               message: "city is required",
             },
           })}
-          field_name="City *"
+          field_name={bhasa === "hindi" ? "शहर *" : "City *"}
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
           type="text"
         />
@@ -214,7 +239,7 @@ function ResumeInputs() {
               message: "pincode is required",
             },
           })}
-          field_name="Pincode *"
+          field_name={bhasa === "hindi" ? "पिन कोड *" : "Pincode *"}
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
           type="number"
         />
@@ -225,19 +250,23 @@ function ResumeInputs() {
               message: "Mobile No. is required",
             },
           })}
-          field_name="Mobile No. *"
+          field_name={bhasa === "hindi" ? "मोबाइल नं. *" : "Mobile No. *"}
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
           type="number"
         />
         <InputField
           register={register("profile")}
-          field_name="What is your Profile ?"
+          field_name={
+            bhasa === "hindi" ? "प्रोफाइल *" : "What is your Profile ?"
+          }
           className={`rounded-lg px-3 outline-blue-500 ${isWide && "max-w-80"}`}
         />
         {/* Qualifications */}
         <div className={`${isWide && "col-span-3 max-w-96"}`}>
           <label className="block mb-2 text-lg text-purple-600">
-            Accademic Qualifications
+            {bhasa === "hindi"
+              ? "शैक्षणिक योग्यता "
+              : "Accademic Qualifications"}
           </label>
           {fields.map((field, index) => (
             <div className="flex justify-between gap-2 mb-2" key={field.id}>
@@ -266,7 +295,7 @@ function ResumeInputs() {
         {/* Other Qualifications */}
         <div className={`${isWide && "col-span-3 max-w-96"}`}>
           <label className="block mb-2 text-lg text-purple-600">
-            Other Qualifications
+            {bhasa === "hindi" ? "अन्य योग्यता " : "Other Qualifications"}
           </label>
           {fields2.map((field, index) => (
             <div className="flex justify-between gap-2 mb-2" key={field.id}>
@@ -302,7 +331,7 @@ function ResumeInputs() {
         {/* Work Experience */}
         <div className={`${isWide && "col-span-3 max-w-96"}`}>
           <label className="block mb-2 text-lg text-purple-600">
-            Work Experience *
+            {bhasa === "hindi" ? "कार्य अनुभव *" : "Work Experience *"}
           </label>
           {fields3.length === 0 && (
             <div className="flex justify-between gap-2 mb-2">
@@ -341,7 +370,7 @@ function ResumeInputs() {
         <hr className={`my-3 ${isWide && "col-span-3"}`} />
         {/* Gender */}
         <div>
-          <label>Gender</label>
+          <label>{bhasa === "hindi" ? "लिंग *" : "Gender *"}</label>
           <select
             {...register("gender", {
               required: {
@@ -351,9 +380,15 @@ function ResumeInputs() {
             })}
             className="w-full px-2 py-2.5 my-3 border rounded-lg outline-none focus:ring-blue-300 focus:ring-4 border-black/30"
           >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value={bhasa === "hindi" ? "पुरुष" : "male"}>
+              {bhasa === "hindi" ? "पुरुष" : "Male"}
+            </option>
+            <option value={bhasa === "hindi" ? "महिला" : "female"}>
+              {bhasa === "hindi" ? "महिला" : "Female"}
+            </option>
+            <option value={bhasa === "hindi" ? "अन्य" : "other"}>
+              {bhasa === "hindi" ? "अन्य" : "Other"}
+            </option>
           </select>
         </div>
 
@@ -371,7 +406,7 @@ function ResumeInputs() {
                 message: "Father's Name is required",
               },
             })}
-            field_name="Father's Name *"
+            field_name={bhasa === "hindi" ? "पिता का नाम *" : "Father's Name *"}
             className={`rounded-lg px-3 outline-none`}
           />
 
@@ -380,7 +415,7 @@ function ResumeInputs() {
               required: { value: true, message: "Email is required" },
               validate: (value) => validator.validate(value) || "Invalid Email",
             })}
-            field_name="Email *"
+            field_name={bhasa === "hindi" ? "ईमेल *" : "Email *"}
             className={`rounded-lg px-3`}
             name="email"
             type="email"
@@ -393,26 +428,28 @@ function ResumeInputs() {
                 message: "Date of Birth is required",
               },
             })}
-            field_name="Date of Birth *"
+            field_name={bhasa === "hindi" ? "जन्म तारीख *" : "Date of Birth *"}
             className={`rounded-lg px-3 outline-none`}
             name="dob"
           />
           <InputField
-            field_name="Language known *"
+            field_name={bhasa === "hindi" ? "भाषा ज्ञात *" : "Language known *"}
             register={register("lang", {
               required: { value: true, message: "Language is required" },
             })}
             className={`rounded-lg px-3 outline-none`}
           />
           <InputField
-            field_name="Nationality *"
+            field_name={bhasa === "hindi" ? "राष्ट्रीयता" : "Nationality *"}
             register={register("nationality", {
               required: { value: true, message: "Nationality is required" },
             })}
             className={`rounded-lg px-3 outline-none`}
           />
           <InputField
-            field_name="Marital Status *"
+            field_name={
+              bhasa === "hindi" ? "वैवाहिक स्थिति" : "Marital Status *"
+            }
             className={`rounded-lg px-3 `}
             register={register("maritalStatus", {
               required: {
