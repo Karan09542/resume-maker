@@ -134,31 +134,31 @@ const PdfResume = ({ candidate }) => {
 
   return (
     <Document
-      title={candidate?.bhasa === "hindi" ? "रेज्यूमे" : candidate.heading}
+      title={candidate?.bhasa === "hindi" ? "रेज्यूमे" : candidate?.heading}
     >
       <Page size="A4" style={styles.page}>
         <View style={styles.container}>
           <Text style={styles.heading}>
-            {candidate?.bhasa === "hindi" ? "रेज्यूमे" : candidate.heading}
+            {candidate?.bhasa === "hindi" ? "रेज्यूमे" : candidate?.heading}
           </Text>
-          <Text style={styles.name}>{candidate.name}</Text>
-          <Text style={styles.profile}>{candidate.profile}</Text>
+          <Text style={styles.name}>{candidate?.name}</Text>
+          <Text style={styles.profile}>{candidate?.profile}</Text>
 
           <View style={styles.address}>
             <Text>
-              {candidate.houseNo}, {candidate.landmark}
+              {candidate?.houseNo}, {candidate?.landmark}
             </Text>
             <Text>
-              {candidate.area}, {candidate.state} - {candidate.pincode}
+              {candidate?.area}, {candidate?.state} - {candidate?.pincode}
             </Text>
             <Text>
               {candidate?.bhasa === "hindi" ? "मोबाइल नं." : "Mob No."}{" "}
-              {candidate.mobileNo}
+              {candidate?.mobileNo}
             </Text>
             <Text>
               {candidate?.bhasa === "hindi" ? "ईमेल" : "Email"}:{" "}
               <Text style={{ fontWeight: "semibold", fontFamily: "Open Sans" }}>
-                {candidate.email}
+                {candidate?.email}
               </Text>
             </Text>
           </View>
@@ -191,7 +191,7 @@ const PdfResume = ({ candidate }) => {
                   : "Academic Qualifications"}
               </Text>
               <View>
-                {candidate.qualifications.map((qualifi, index) => (
+                {candidate?.qualifications.map((qualifi, index) => (
                   <Text key={index} style={styles.listItem}>
                     • {qualifi}
                   </Text>
@@ -208,7 +208,7 @@ const PdfResume = ({ candidate }) => {
                   : "Other Qualifications"}
               </Text>
               <View>
-                {candidate.otherQualifications.map((otherQualifi, index) => (
+                {candidate?.otherQualifications.map((otherQualifi, index) => (
                   <Text key={index} style={styles.listItem}>
                     • {otherQualifi}
                   </Text>
@@ -242,7 +242,7 @@ const PdfResume = ({ candidate }) => {
                     : "Father's Name"}
                 </Text>
                 <View style={styles.personalValues}>
-                  <Text>:</Text> <Text>{candidate.fname}</Text>
+                  <Text>:</Text> <Text>{candidate?.fname}</Text>
                 </View>
               </View>
               <View style={styles.personalItems}>
@@ -252,7 +252,7 @@ const PdfResume = ({ candidate }) => {
                     : "Date of Birth"}
                 </Text>
                 <View style={styles.personalValues}>
-                  <Text>:</Text> <Text>{candidate.dob}</Text>
+                  <Text>:</Text> <Text>{candidate?.dob}</Text>
                 </View>
               </View>
               <View style={styles.personalItems}>
@@ -262,7 +262,7 @@ const PdfResume = ({ candidate }) => {
                     : "Language Known"}
                 </Text>
                 <View style={styles.personalValues}>
-                  <Text>:</Text> <Text>{candidate.lang}</Text>
+                  <Text>:</Text> <Text>{candidate?.lang}</Text>
                 </View>
               </View>
               <View style={styles.personalItems}>
@@ -270,7 +270,7 @@ const PdfResume = ({ candidate }) => {
                   {candidate?.bhasa === "hindi" ? "लिंग" : "Gender"}
                 </Text>
                 <View style={styles.personalValues}>
-                  <Text>:</Text> <Text>{candidate.gender}</Text>
+                  <Text>:</Text> <Text>{candidate?.gender}</Text>
                 </View>
               </View>
               <View style={styles.personalItems}>
@@ -279,7 +279,7 @@ const PdfResume = ({ candidate }) => {
                 </Text>
                 <View style={styles.personalValues}>
                   <Text>:</Text>
-                  <Text>{candidate.nationality}</Text>
+                  <Text>{candidate?.nationality}</Text>
                 </View>
               </View>
               <View style={styles.personalItems}>
@@ -290,7 +290,7 @@ const PdfResume = ({ candidate }) => {
                 </Text>
                 <View style={styles.personalValues}>
                   <Text>:</Text>
-                  <Text>{candidate.maritalStatus}</Text>
+                  <Text>{candidate?.maritalStatus}</Text>
                 </View>
               </View>
             </View>
@@ -319,9 +319,9 @@ const PdfResume = ({ candidate }) => {
             <View style={styles.placeName}>
               <Text>
                 {candidate?.bhasa === "hindi" ? "स्थान" : "Place"}:{" "}
-                {candidate.state}
+                {candidate?.state}
               </Text>
-              <Text>{candidate.name}</Text>
+              <Text>{candidate?.name}</Text>
             </View>
           </View>
         </View>

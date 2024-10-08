@@ -137,7 +137,6 @@ function ResumeInputs() {
 
   const [bhasa, setBhasa] = useState("english");
   const handleResumeLang = (e) => {
-    console.log(typeof e.target.checked);
     if (e.target.checked) {
       setBhasa("hindi");
     } else {

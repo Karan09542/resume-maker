@@ -5,7 +5,8 @@ import PdfResume from "./PdfResume";
 
 const Download = ({ candidate }) => {
   return (
-    <div className="p-6 bg-gray-100 font-openSans">
+    // p-6 bg-gray-100 font-openSans
+    <div className="">
       <PDFDownloadLink
         document={<PdfResume candidate={candidate} />}
         fileName={candidate.name + ".pdf"}
