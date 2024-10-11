@@ -88,6 +88,7 @@ function ResumeInputs() {
     localStorage.setItem("resumesObjs", JSON.stringify(resumes));
     setIsChangeResumesObjs();
     setResumeId(newResuemId);
+    setBhasa("english");
     toast.success(`${resumes[newResuemId].name} Resume updated successfully`);
   };
 
