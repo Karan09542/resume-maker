@@ -103,17 +103,17 @@ scroll-width-thin max-h-[500px] px-5 py-3 bg-white divide-y-2 divide-gray-100"
                       <div className="flex gap-3 scale-95">
                         <FaPencil
                           size={36}
-                          className="p-2 text-orange-300 border rounded-lg shadow-lg active:scale-95"
+                          className="p-2 text-orange-300 border rounded-lg shadow-lg cursor-pointer active:scale-95"
                           onClick={() => handleEditResume(key)}
                         />
                         <MdDelete
                           size={36}
-                          className="p-2 border rounded-lg shadow-lg text-rose-500 active:scale-95"
+                          className="p-2 border rounded-lg shadow-lg cursor-pointer text-rose-500 active:scale-95"
                           onClick={() => handleDeleteResume(key)}
                         />
                         <GoDownload
                           size={36}
-                          className="p-2 border rounded-lg shadow-lg text-rose-500 active:scale-95"
+                          className="p-2 border rounded-lg shadow-lg cursor-pointer text-rose-500 active:scale-95"
                           onClick={() => handleDownloadResume(key)}
                         />
                       </div>

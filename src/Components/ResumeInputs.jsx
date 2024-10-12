@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import {
   useChangeResumesObjsStore,
+  useImageStore,
   useResumeIdStore,
   useResumeStore,
 } from "../../Store/Resume";
@@ -42,7 +43,10 @@ function ResumeInputs() {
         elem !== "heading" &&
         elem !== "qualifications" &&
         elem !== "otherQualifications" &&
-        elem !== "profile"
+        elem !== "profile" &&
+        elem !== "objective" &&
+        elem !== "declaration" &&
+        elem !== "image"
       )
         return getValues()[elem] === "";
     });
@@ -80,7 +84,6 @@ function ResumeInputs() {
       toast.error("Please select a resume");
       return;
     }
-
     const resumes = JSON.parse(localStorage.getItem("resumesObjs"));
     delete resumes[resumeId];
     const newResuemId = `${getValues().name}-${Date.now()}`;
@@ -147,6 +150,51 @@ function ResumeInputs() {
   useEffect(() => {
     setValue("bhasa", bhasa);
   }, [bhasa]);
+
+  const setImage = useImageStore((state) => state.setImage);
+  const image = useImageStore((state) => state.image);
+  useEffect(() => {
+    setImage(image);
+  }, [image]);
+
+  function handleImageChange(ram) {
+    const file = ram.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (ram) => {
+        const img = new Image();
+        img.src = ram.target.result;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          const maxWidth = 100; // desired width
+          let width = img.width;
+          let height = img.height;
+
+          // Calculate new height while maintaining aspect ratio
+          if (width > maxWidth) {
+            if (height > maxWidth) {
+              height *= maxWidth / width;
+            }
+            width = maxWidth;
+          }
+
+          // Set canvas width and auto-calculated height
+          canvas.width = width;
+          canvas.height = height;
+
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const resizedImage = canvas.toDataURL("image/jpeg", 1);
+
+          setImage({ image: resizedImage, name: file.name });
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   return (
     <div className="fixed w-screen h-full overflow-y-scroll bg-gray-50">
@@ -457,6 +505,53 @@ function ResumeInputs() {
               },
             })}
           />
+          <textarea
+            {...register("objective")}
+            placeholder={bhasa === "hindi" ? "किरयर उदेशय " : "Objective"}
+            className="w-full px-2 py-2.5 my-3 border rounded-lg outline-none focus:ring-blue-300 focus:ring-4 border-black/30"
+          ></textarea>
+          <textarea
+            {...register("declaration")}
+            className="w-full px-2 py-2.5 my-3 border rounded-lg outline-none focus:ring-blue-300 focus:ring-4 border-black/30"
+            placeholder={bhasa === "hindi" ? "घोषणा" : "Declaration "}
+          ></textarea>
+          <div className="flex items-center self-center gap-3 p-3 border border-dashed rounded-lg border-black/30 w-fit">
+            <label className="flex items-center px-4 py-2 font-semibold text-white bg-blue-600 rounded-lg shadow-md cursor-pointer hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95 active:bg-rose-500">
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 me-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Select Image
+            </label>
+            {image && (
+              <span className="flex flex-col items-center gap-y-2">
+                {image.name}{" "}
+                <button
+                  onClick={() => setImage(null)}
+                  type="button"
+                  className="px-2 py-1 text-white bg-red-500 rounded-lg"
+                >
+                  clear
+                </button>
+              </span>
+            )}
+          </div>
         </div>
         <div
           className={` ${

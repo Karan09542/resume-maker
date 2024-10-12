@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import Download from "./Download";
+import { useImageStore } from "../../../Store/Resume";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -85,10 +86,11 @@ const Pdf_Page = () => {
     );
   }
 
+  const image = useImageStore((state) => state.image);
   // Rendering for non-mobile browsers
   return (
     <PDFViewer style={{ width: "100vw", height: "100vh" }}>
-      <PdfResume candidate={candidate} />
+      <PdfResume candidate={candidate} image={image} />
     </PDFViewer>
   );
 };

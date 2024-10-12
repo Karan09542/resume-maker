@@ -21,7 +21,9 @@ export const useResumeStore = create((set)=>({
         lang: "",
         city: "",
         nationality: "",
-        maritalStatus: ""
+        maritalStatus: "",
+        objective: "",
+        declaration: "",
     },
 //     resume: {
 //     heading: "RESUME",
@@ -58,4 +60,9 @@ export const  useChangeResumesObjsStore = create((set)=>({
 export const useResumeIdStore = create((set)=>({
     resumeId: null,
     setResumeId: (data)=> set({resumeId: data})
+}))
+
+export const useImageStore = create((set)=>({
+    image: null,
+    setImage: (img)=> set({image: img})
 }))

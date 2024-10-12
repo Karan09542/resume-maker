@@ -2,14 +2,12 @@ import {
   Document,
   Font,
   Page,
-  PDFDownloadLink,
   StyleSheet,
   Text,
   View,
   Image,
 } from "@react-pdf/renderer";
 import React from "react";
-import mahadev from "../../assets/mahadev.png";
 import OpenSansSemibold from "../../assets/fonts/open-sans.semibold.ttf";
 import OpenSansbold from "../../assets/fonts/open-sans.bold.ttf";
 import OpenSansRegular from "../../assets/fonts/open-sans.regular.ttf";
@@ -17,7 +15,10 @@ import NotoSansRegular from "../../assets/noto/NotoSansDevanagari-Regular.ttf";
 import NotoSansBold from "../../assets/noto/NotoSansDevanagari-Bold.ttf";
 import NotoSansSemibold from "../../assets/noto/NotoSansDevanagari-SemiBold.ttf";
 
-const PdfResume = ({ candidate }) => {
+const PdfResume = ({ candidate, image }) => {
+  if (image) {
+    console.log(image);
+  }
   Font.register({
     family: "Open Sans",
     fonts: [
@@ -130,6 +131,13 @@ const PdfResume = ({ candidate }) => {
       fontWeight: "semibold",
       justifyContent: "space-between",
     },
+    image: {
+      position: "absolute",
+      width: 100,
+      right: 0,
+      top: 30,
+      padding: 3,
+    },
   });
 
   return (
@@ -141,6 +149,9 @@ const PdfResume = ({ candidate }) => {
           <Text style={styles.heading}>
             {candidate?.bhasa === "hindi" ? "रेज्यूमे" : candidate?.heading}
           </Text>
+
+          {image?.image && <Image style={styles.image} src={image?.image} />}
+
           <Text style={styles.name}>{candidate?.name}</Text>
           <Text style={styles.profile}>{candidate?.profile}</Text>
 
@@ -178,8 +189,10 @@ const PdfResume = ({ candidate }) => {
               }}
             >
               {candidate?.bhasa === "hindi"
-                ? "अपनी सर्वोत्तम क्षमता के साथ संगठन में योगदान देना और नई ऊंचाइयों को प्राप्त करने के लिए बातचीत के दौरान नए कौशल विकसित करना।"
-                : "To make contribution in the organization with best of my ability and also to develop new skills during the interaction to achieve new heights."}
+                ? candidate?.objective ||
+                  "अपनी सर्वोत्तम क्षमता के साथ संगठन में योगदान देना और नई ऊंचाइयों को प्राप्त करने के लिए बातचीत के दौरान नए कौशल विकसित करना।"
+                : candidate?.objective ||
+                  "To make contribution in the organization with best of my ability and also to develop new skills during the interaction to achieve new heights."}
             </Text>
           </View>
 
@@ -310,8 +323,10 @@ const PdfResume = ({ candidate }) => {
             </Text>
             <Text>
               {candidate?.bhasa === "hindi"
-                ? "मैं एतद्द्वारा घोषणा करता हूं कि मेरे द्वारा दी गई उपरोक्त जानकारी मेरी सर्वोत्तम जानकारी के अनुसार सत्य है।"
-                : "I hereby declare that the above information given by me is true to the best of my knowledge."}
+                ? candidate?.declaration ||
+                  "मैं एतद्द्वारा घोषणा करता हूं कि मेरे द्वारा दी गई उपरोक्त जानकारी मेरी सर्वोत्तम जानकारी के अनुसार सत्य है।"
+                : candidate?.declaration ||
+                  "I hereby declare that the above information given by me is true to the best of my knowledge."}
             </Text>
             <Text style={styles.date}>
               {candidate?.bhasa === "hindi" ? "दिनांक" : "Date"}:
