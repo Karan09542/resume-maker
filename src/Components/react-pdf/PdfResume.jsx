@@ -50,7 +50,7 @@ const PdfResume = ({ candidate, image }) => {
       fontFamily: candidate?.bhasa === "hindi" ? "Noto Sans" : "Open Sans",
     },
     heading: {
-      fontSize: 24,
+      fontSize: 22,
       textAlign: "center",
       fontWeight: "bold",
       marginBottom: 16,
@@ -59,30 +59,30 @@ const PdfResume = ({ candidate, image }) => {
     name: {
       marginBottom: 4,
       textTransform: "uppercase",
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
     },
     profile: {
       marginBottom: 11,
-      fontSize: 13,
+      fontSize: 11,
       textTransform: "capitalize",
     },
 
     address: {
       fontWeight: "semibold",
-      fontSize: 15,
+      fontSize: 13,
       lineHeight: 1.5,
       marginBottom: 7,
     },
 
     subHeadingContainer: {
-      fontSize: 13,
+      fontSize: 11,
       margin: "2px 0",
     },
     subHeading: {
       paddingHorizontal: 8, // equivalent to `px-2`
       paddingVertical: 3, // equivalent to `py-1`
-      fontSize: 16, // equivalent to `text-xl`
+      fontSize: 14, // equivalent to `text-xl`
       textTransform: "uppercase", // equivalent to `uppercase`
       backgroundColor: "#E7E5E4", // equivalent to `bg-stone-200`
       marginBottom: 11,
@@ -102,7 +102,7 @@ const PdfResume = ({ candidate, image }) => {
       columnGap: "5px",
       rowGap: "50px",
       lineHeight: 1.5,
-      fontSize: 12,
+      fontSize: 10,
 
       fontWeight: "semibold",
     },
