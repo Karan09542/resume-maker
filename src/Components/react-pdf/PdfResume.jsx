@@ -16,9 +16,6 @@ import NotoSansBold from "../../assets/noto/NotoSansDevanagari-Bold.ttf";
 import NotoSansSemibold from "../../assets/noto/NotoSansDevanagari-SemiBold.ttf";
 
 const PdfResume = ({ candidate, image }) => {
-  if (image) {
-    console.log(image);
-  }
   Font.register({
     family: "Open Sans",
     fonts: [
@@ -217,8 +214,8 @@ const PdfResume = ({ candidate, image }) => {
             <View style={styles.subHeadingContainer}>
               <Text style={styles.subHeading}>
                 {candidate?.bhasa === "hindi"
-                  ? "अन्य योग्यता"
-                  : "Other Qualifications"}
+                  ? "अन्य कौशल"
+                  : "Skills"}
               </Text>
               <View>
                 {candidate?.otherQualifications.map((otherQualifi, index) => (

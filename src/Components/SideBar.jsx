@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { GoDownload } from "react-icons/go";
 import {
   useChangeResumesObjsStore,
+  useImageStore,
   useResumeIdStore,
   useResumeStore,
 } from "../../Store/Resume";
@@ -19,6 +20,7 @@ function SideBar() {
   const isChangeResumesObjs = useChangeResumesObjsStore(
     (state) => state.isChangeResumesObjs
   );
+  const image = useImageStore((state) => state.image);
   const setIsChangeResumesObjs = useChangeResumesObjsStore(
     (state) => state.setIsChangeResumesObjs
   );
@@ -45,7 +47,7 @@ function SideBar() {
 
   const handleDownloadResume = async (key) => {
     const resume = resumesObjs[key];
-    const doc = <PdfResume candidate={resume} />;
+    const doc = <PdfResume candidate={resume} image={image} />;
     const asPdf = pdf(doc);
     const blob = await asPdf.toBlob();
 

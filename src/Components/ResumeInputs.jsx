@@ -37,7 +37,6 @@ function ResumeInputs() {
     values: resume,
   });
   const isSubmitted = () => {
-    console.log("value", getValues());
     const isAnyFieldEmpty = Object.keys(getValues()).some((elem) => {
       if (
         elem !== "heading" &&

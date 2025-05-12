@@ -15,12 +15,13 @@ const Pdf_Page = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const params = useParams();
+  const image = useImageStore((state) => state.image);
 
   useEffect(() => {
     const resumesObjs = JSON.parse(localStorage.getItem("resumesObjs"));
     const candidateData = resumesObjs[params.resumeId];
     setCandidate(candidateData);
-    document.title = candidateData.name;
+    document.title = candidateData?.name || "Resume";
   }, [params.resumeId]);
 
   // Helper function to detect mobile browsers
@@ -35,7 +36,7 @@ const Pdf_Page = () => {
       const generatePdfForMobile = async () => {
         const resumesObjs = JSON.parse(localStorage.getItem("resumesObjs"));
         const resume = resumesObjs[params.resumeId];
-        const doc = <PdfResume candidate={resume} />;
+        const doc = <PdfResume candidate={resume} image={image}  />;
         const asPdf = pdf(doc);
         const blob = await asPdf.toBlob(); // Convert to Blob
         const blobUrl = URL.createObjectURL(blob); // Create Blob URL for Document
@@ -57,7 +58,7 @@ const Pdf_Page = () => {
       <div className="flex flex-col items-center justify-center">
         <p className="sticky top-0 z-10 flex items-center justify-between w-full px-4 py-2 text-center bg-white">
           Page {pageNumber} of {numPages}
-          <Download candidate={candidate} />
+          <Download candidate={candidate} image={image} />
         </p>
         {pdfBlobUrl ? (
           <>
@@ -86,7 +87,6 @@ const Pdf_Page = () => {
     );
   }
 
-  const image = useImageStore((state) => state.image);
   // Rendering for non-mobile browsers
   return (
     <PDFViewer style={{ width: "100vw", height: "100vh" }}>
