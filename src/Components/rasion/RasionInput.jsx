@@ -178,7 +178,7 @@ const RasionInput = ({
               className="border px-2 py-1 outline-none"
             >
               <option value="सामान्य परिवार">सामान्य परिवार</option>
-              <option value="प्राथमिकता परिवार">प्राथमिकता परिवार</option>
+              <option value="प्राथमिकता कार्ड">प्राथमिकता कार्ड</option>
             </select>
           </div>
           <div className="flex flex-col border">
