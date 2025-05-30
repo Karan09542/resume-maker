@@ -33,6 +33,7 @@ const RasionInput = ({
     pata: "पता",
     familyCategory: "परिवार की श्रेणी",
     rasionStore: "संलग्न उचित मूल्य दुकान",
+    cardType: "कार्ड का प्रकार",
   };
   function onSubmit(data) {
     console.log(data);
@@ -53,25 +54,14 @@ const RasionInput = ({
       name: "pati",
       label: mapping.pati,
     },
-    {
-      name: "jaati",
-      label: mapping.jaati,
-    },
+
     {
       name: "pata",
       label: mapping.pata,
     },
     {
-      name: "familyCategory",
-      label: mapping.familyCategory,
-    },
-    {
       name: "rasionStore",
       label: mapping.rasionStore,
-    },
-    {
-      name: "cardType",
-      label: `कार्ड प्रकार जैसे: "एपीएल (सामान्य परिवार)"`,
     },
   ];
 
@@ -160,6 +150,53 @@ const RasionInput = ({
               )}
             </div>
           ))}
+        </div>
+        <div className="grid grid-cols-2 w-fit gap-2">
+          <div className="flex flex-col border">
+            <label className="px-1 py-1 text-sm text-yellow-500">
+              {mapping.jaati}
+            </label>
+            <select
+              {...register(`jaati`, {
+                value: "सामान्य",
+              })}
+              className="border px-2 py-1 outline-none"
+            >
+              <option value="सामान्य">सामान्य</option>
+              <option value="अन्य पिछड़ा वर्ग">अन्य पिछड़ा वर्ग</option>
+            </select>
+          </div>
+
+          <div className="flex flex-col border">
+            <label className="px-1 py-1 text-sm text-yellow-500">
+              {mapping.familyCategory}
+            </label>
+            <select
+              {...register(`familyCategory`, {
+                value: "सामान्य परिवार",
+              })}
+              className="border px-2 py-1 outline-none"
+            >
+              <option value="सामान्य परिवार">सामान्य परिवार</option>
+              <option value="प्राथमिकता परिवार">प्राथमिकता परिवार</option>
+            </select>
+          </div>
+          <div className="flex flex-col border">
+            <label className="px-1 py-1 text-sm text-yellow-500">
+              {mapping.cardType}
+            </label>
+            <select
+              {...register(`cardType`, {
+                value: "एपीएल (सामान्य परिवार)",
+              })}
+              className="border px-2 py-1 outline-none"
+            >
+              <option value="एपीएल (सामान्य परिवार)">
+                एपीएल (सामान्य परिवार)
+              </option>
+              <option value="प्राथमिकता कार्ड">प्राथमिकता कार्ड</option>
+            </select>
+          </div>
 
           <div className="flex flex-col border">
             <label className="px-1 py-1 text-sm text-yellow-500">

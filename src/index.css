@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 
+@media print {
+  body {
+    -webkit-print-color-adjust: exact; /* Chrome */
+    print-color-adjust: exact;         /* Firefox */
+  }
+
+  .print-area {
+    background-color: #a8a8a8 !important;
+    /* color: black !important; */
+  }
+}
+
 .sub-heading {
     @apply px-2 py-1 mb-2 text-xl font-bold uppercase bg-stone-200 ;
 }

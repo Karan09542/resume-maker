@@ -9,7 +9,7 @@ const Rasion = () => {
   const [isHint, setIsHint] = React.useState(false);
   return (
     <div className="relative flex justify-center mt-10">
-      <div className="absolute left-0 z-10">
+      <div className="absolute left-0 z-10 print:hidden">
         {isRasionInputOpen ? (
           <RasionInput
             scale={scale}
