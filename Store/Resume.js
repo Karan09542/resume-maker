@@ -66,3 +66,8 @@ export const useImageStore = create((set)=>({
     image: null,
     setImage: (img)=> set({image: img})
 }))
+
+export const useRasionStore = create((set)=>({
+    rasionData: null,
+    setRasionData: (rasionData)=> set({rasionData})
+}))

@@ -11,8 +11,17 @@ li{
     @apply text-[1.05rem] list-none leading-6 indent-8 font-medium;
 }
 
-@layer base {img {display: initial;}}
+@layer base {img {display: initial;}
+}
 
 .scroll-width-thin {
     scrollbar-width: thin;
+}
+@layer components {
+    .feeling-press {
+        @apply cursor-pointer active:scale-95 transition-all duration-200 ease-in-out;
+    }
+    .highlight-red {
+        @apply text-red-500 font-bold;
+    }
 }
