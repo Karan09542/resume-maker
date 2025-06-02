@@ -34,6 +34,10 @@ const RasionInput = ({
     familyCategory: "परिवार की श्रेणी",
     rasionStore: "संलग्न उचित मूल्य दुकान",
     cardType: "कार्ड का प्रकार",
+    storeWard: "दुकान वर्ड",
+    storeId: "दुकान क्रमांक",
+    pataWard: "पता वर्ड",
+    pataId: "पता क्रमांक",
   };
   function onSubmit(data) {
     console.log(data);
@@ -55,15 +59,21 @@ const RasionInput = ({
       label: mapping.pati,
     },
 
-    {
-      name: "pata",
-      label: mapping.pata,
-    },
-    {
-      name: "rasionStore",
-      label: mapping.rasionStore,
-    },
+    // {
+    //   name: "pata",
+    //   label: mapping.pata,
+    // },
+    // {
+    //   name: "rasionStore",
+    //   label: mapping.rasionStore,
+    // },
   ];
+
+  // const damodar = {
+  //   name: "pata",
+  //   ward: "pataWard",
+  //   id: "pataId",
+  // }
 
   const memberErrorMessage = {
     name: `श्रीमान/मति का नाम दर्ज करें`,
@@ -150,6 +160,28 @@ const RasionInput = ({
               )}
             </div>
           ))}
+        </div>
+        {/* pata */}
+        <div>
+          <h2 className="text-white text-2xl mb-3">{mapping.pata}</h2>
+          <LabeledTextInput
+            register={register("pata.ward")}
+            label={mapping.pataWard}
+          />
+        </div>
+        {/* store */}
+        <div>
+          <h2 className="text-white text-2xl mb-3">{mapping.rasionStore}</h2>
+          <div className="grid grid-cols-2 [&>*]:w-full gap-2 mb-3">
+            <LabeledTextInput
+              register={register("rasionStore.ward")}
+              label={mapping.storeWard}
+            />
+            <LabeledTextInput
+              register={register("rasionStore.id")}
+              label={mapping.storeId}
+            />
+          </div>
         </div>
         <div className="grid grid-cols-2 w-fit gap-2">
           <div className="flex flex-col border">

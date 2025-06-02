@@ -4,46 +4,62 @@ import { useRasionStore } from "../../../Store/Resume";
 const RasionRight = ({ scale, A4size, isHint }) => {
   const rasionData = useRasionStore((state) => state.rasionData);
   const familyObj = {
-    "परिवार के मुखिया का नाम":
-      rasionData?.mukhiya ? rasionData?.mukhiya: !isHint ? "सरला सोनी" : "मुखिया का नाम",
-    "पिता/पति का नाम":
-      rasionData?.pati ? rasionData?.pati: !isHint ? "शकर लाल सोनी" : "पति का नाम",
-    "जाति संवर्ग":
-      rasionData?.jaati ? rasionData?.jaati: !isHint ? (
-        "सामान्य"
-      ) : (
-        <span className="text-green-500">
-          जाति संवर्ग जैसे : <span className={`highlight-red`}>सामान्य</span>
+    "परिवार के मुखिया का नाम": rasionData?.mukhiya
+      ? rasionData?.mukhiya
+      : !isHint
+      ? "सरला सोनी"
+      : "मुखिया का नाम",
+    "पिता/पति का नाम": rasionData?.pati
+      ? rasionData?.pati
+      : !isHint
+      ? "शकर लाल सोनी"
+      : "पति का नाम",
+    "जाति संवर्ग": rasionData?.jaati ? (
+      rasionData?.jaati
+    ) : !isHint ? (
+      "सामान्य"
+    ) : (
+      <span className="text-green-500">
+        जाति संवर्ग जैसे : <span className={`highlight-red`}>सामान्य</span>
+      </span>
+    ),
+    पता: rasionData?.pata ? (
+      <p>
+        जिला - मनेन्द्रगढ़-चिरमिरी-भरतपुर,नगरीय <br /> निकाय - मनेन्द्रगढ़ <br />{" "}
+        वार्ड - {rasionData?.pata.ward}
+      </p>
+    ) : !isHint ? (
+      "जिला - बेमेतरा, विकासखंड - नवागढ़, ग्राम पंचायत - टेमरी, ग्राम - टेमरी"
+    ) : (
+      <span className="text-green-500">
+        पता जैसे: <span className="highlight-red">1/7 सीतारामगली</span>
+      </span>
+    ),
+    "परिवार की श्रेणी": rasionData?.familyCategory ? (
+      rasionData?.familyCategory
+    ) : !isHint ? (
+      "सामान्य परिवार"
+    ) : (
+      <span className="text-green-500">
+        परिवार की श्रेणी जैसे:{" "}
+        <span className="highlight-red">सामान्य परिवार</span>
+      </span>
+    ),
+    "संलग्न उचित मूल्य दुकान": rasionData?.rasionStore ? (
+      <p>
+        ग्राम पंचायत/वार्ड - {rasionData?.rasionStore.ward} <br /> दुकान क्रमांक
+        - {rasionData?.rasionStore.id}
+      </p>
+    ) : !isHint ? (
+      "ग्राम पंचायत/वार्ड - टेमरी, दुकान क्रमांक - 432012065"
+    ) : (
+      <span className="text-green-500">
+        रासन दुकान का पता जैसे:{" "}
+        <span className="highlight-red">
+          ग्राम पंचायत/वार्ड - टेमरी, दुकान क्रमांक - 432012065
         </span>
-      ),
-    पता:
-      rasionData?.pata ? rasionData?.pata: !isHint ? (
-        "जिला - बेमेतरा, विकासखंड - नवागढ़, ग्राम पंचायत - टेमरी, ग्राम - टेमरी"
-      ) : (
-        <span className="text-green-500">
-          पता जैसे: <span className="highlight-red">1/7 सीतारामगली</span>
-        </span>
-      ),
-    "परिवार की श्रेणी":
-      rasionData?.familyCategory ? rasionData?.familyCategory: !isHint ? (
-        "सामान्य परिवार"
-      ) : (
-        <span className="text-green-500">
-          परिवार की श्रेणी जैसे:{" "}
-          <span className="highlight-red">सामान्य परिवार</span>
-        </span>
-      ),
-    "संलग्न उचित मूल्य दुकान":
-      rasionData?.rasionStore ? rasionData?.rasionStore: !isHint ? (
-        "ग्राम पंचायत/वार्ड - टेमरी, दुकान क्रमांक - 432012065"
-      ) : (
-        <span className="text-green-500">
-          रासन दुकान का पता जैसे:{" "}
-          <span className="highlight-red">
-            ग्राम पंचायत/वार्ड - टेमरी, दुकान क्रमांक - 432012065
-          </span>
-        </span>
-      ),
+      </span>
+    ),
   };
   //   A4 paper size
   return (
@@ -60,7 +76,11 @@ const RasionRight = ({ scale, A4size, isHint }) => {
             style={{ textIndent: `${21 * scale}px` }}
             className="font-bold inline-block"
           >
-            {rasionData?.rasionCardNo ? rasionData?.rasionCardNo : !isHint? "226507810206" : (
+            {rasionData?.rasionCardNo ? (
+              rasionData?.rasionCardNo
+            ) : !isHint ? (
+              "226507810206"
+            ) : (
               <span className="font-bold text-red-500">राशनकार्ड क्रमांक</span>
             )}
           </span>
@@ -80,7 +100,7 @@ const RasionRight = ({ scale, A4size, isHint }) => {
       <div className="relative">
         {/* photo */}
         <div
-          style={{ top: `${-40 * scale}px`, fontSize: `${14 * scale}px` }}
+          style={{ top: `${-40 * scale}px`, fontSize: `${12 * scale}px` }}
           className="absolute right-10 w-[100px] aspect-[3/4] border-2 border-black font-normal text-center"
         >
           पासपोर्ट साइज़ का रंगीन फोटो लगायें
@@ -98,9 +118,12 @@ const RasionRight = ({ scale, A4size, isHint }) => {
             <tr
               key={key}
               style={{
-                height: [2,3].includes(index) ? `${56 * scale}px` : `${40 * scale}px`,
+                height: [2, 3].includes(index)
+                  ? `${56 * scale}px`
+                  : `${40 * scale}px`,
+                lineHeight: [4].includes(index) ? `${45 * scale}px` : "unset",
               }}
-              className={`align-top`}
+              className={`align-top `}
             >
               <td
                 style={{ marginRight: `${40 * scale}px` }}
@@ -108,7 +131,11 @@ const RasionRight = ({ scale, A4size, isHint }) => {
               >
                 {index + 1}. {key}
               </td>
-              <td className={`max-w-[230px]`}>: {familyObj[key]}</td>
+              <td className={`max-w-[260px]`}>
+                <div className="flex gap-x-1">
+                  <span>:</span> {familyObj[key]}
+                </div>
+              </td>
             </tr>
           ))}
         </table>
@@ -126,7 +153,11 @@ const RasionRight = ({ scale, A4size, isHint }) => {
           className="max-w-[270px] text-center"
         >
           <img
-            style={{ width: `${140 * scale}px`, aspectRatio: "1/1", marginTop: `${20 * scale}px` }}
+            style={{
+              width: `${140 * scale}px`,
+              aspectRatio: "1/1",
+              marginTop: `${20 * scale}px`,
+            }}
             src="/qrcode.png"
             alt="QR Code"
           />
