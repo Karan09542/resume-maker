@@ -8,7 +8,7 @@ const Rasion = () => {
   const [isRasionInputOpen, setIsRasionInputOpen] = React.useState(false);
   const [isHint, setIsHint] = React.useState(false);
   return (
-    <div className="relative flex justify-center mt-10">
+    <div className="relative flex justify-center gap-[4.5cm] mt-[2.1cm] mb-[3.8cm]">
       <div className="z-10 print:hidden">
         {isRasionInputOpen ? (
           <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">

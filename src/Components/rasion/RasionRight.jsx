@@ -101,7 +101,7 @@ const RasionRight = ({ scale, A4size, isHint }) => {
         {/* photo */}
         <div
           style={{ top: `${-40 * scale}px`, fontSize: `${12 * scale}px` }}
-          className="absolute right-10 w-[100px] aspect-[3/4] border-2 border-black font-normal text-center"
+          className="absolute right-10 w-[2.5cm] h-[2.8cm] border-2 border-black font-normal text-center"
         >
           पासपोर्ट साइज़ का रंगीन फोटो लगायें
         </div>
@@ -154,7 +154,8 @@ const RasionRight = ({ scale, A4size, isHint }) => {
         >
           <img
             style={{
-              width: `${140 * scale}px`,
+              // width: `${130 * scale}px`,
+              width: `${2.4 * scale}cm`,
               aspectRatio: "1/1",
               marginTop: `${20 * scale}px`,
             }}

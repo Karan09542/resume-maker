@@ -12,7 +12,7 @@ const RasionLeft = ({ scale, A4size }) => {
       <div className="mx-auto w-fit text-center h-full">
         <div
           style={{ fontSize: `${14 * scale}px`, lineHeight: `${20 * scale}px` }}
-          className="font-bold text-sm w-fit mx-auto bg-[#a8a8a8] print-area p-2 rounded"
+          className="font-bold text-sm w-[5cm] mx-auto bg-[#a8a8a8] print-area p-2 rounded"
         >
           परिवार के सदस्यों का विवरण
         </div>

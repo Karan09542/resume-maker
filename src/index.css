@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+/* @page { size: A4 landscape;  } */
 @media print {
   body {
     -webkit-print-color-adjust: exact; /* Chrome */

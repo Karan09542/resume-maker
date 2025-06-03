@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import LabeledTextInput from "./components/LabeledTextInput";
 import { toast } from "react-toastify";
@@ -22,9 +22,15 @@ const RasionInput = ({
     formState: { errors },
     reset,
     control,
+    watch,
   } = useForm({
     defaultValues: rasionData,
   });
+
+  // const watchFamilyMembers = watch("familyMembers");
+  const watchForm = watch();
+
+ 
 
   const mapping = {
     mukhiya: "मुखिया",
@@ -58,22 +64,7 @@ const RasionInput = ({
       name: "pati",
       label: mapping.pati,
     },
-
-    // {
-    //   name: "pata",
-    //   label: mapping.pata,
-    // },
-    // {
-    //   name: "rasionStore",
-    //   label: mapping.rasionStore,
-    // },
   ];
-
-  // const damodar = {
-  //   name: "pata",
-  //   ward: "pataWard",
-  //   id: "pataId",
-  // }
 
   const memberErrorMessage = {
     name: `श्रीमान/मति का नाम दर्ज करें`,
@@ -115,7 +106,9 @@ const RasionInput = ({
       <form className="w-fit" onSubmit={handleSubmit(onSubmit)}>
         {/* reset button */}
         <div className="flex justify-between gap-3 mb-3">
+      
           <button
+            type="reset"
             className="bg-rose-500 text-white px-4 py-2 rounded feeling-press"
             onClick={() => {
               reset();
