@@ -15,6 +15,27 @@
   }
 }
 
+.modern-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 255, 0.4);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 255, 0.6);
+}
+
 .sub-heading {
     @apply px-2 py-1 mb-2 text-xl font-bold uppercase bg-stone-200 ;
 }

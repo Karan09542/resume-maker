@@ -97,7 +97,7 @@ const RasionInput = ({
   return (
     <div
       ref={formContainerRef}
-      className="bg-gradient-to-t from-gray-900 to-gray-800 p-8"
+      className="max-h-[98vh] modern-scrollbar overflow-y-auto bg-gradient-to-t from-gray-900 to-gray-800 p-8"
     >
       <label htmlFor="scale" className="text-white text-2xl">
         Rasion Scale up/down
