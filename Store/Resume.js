@@ -71,3 +71,17 @@ export const useRasionStore = create((set)=>({
     rasionData: null,
     setRasionData: (rasionData)=> set({rasionData})
 }))
+
+
+// /* @page { size: A4 landscape;  } */
+// @media print {
+//   body {
+//     -webkit-print-color-adjust: exact; /* Chrome */
+//     print-color-adjust: exact;         /* Firefox */
+//   }
+
+//   .print-area {
+//     background-color: #a8a8a8 !important;
+//     /* color: black !important; */
+//   }
+// }

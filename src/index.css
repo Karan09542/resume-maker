@@ -1,19 +1,27 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
-
-/* @page { size: A4 landscape;  } */
 @media print {
-  body {
-    -webkit-print-color-adjust: exact; /* Chrome */
-    print-color-adjust: exact;         /* Firefox */
+  .print-hidden {
+    display: none;
   }
+}
 
-  .print-area {
-    background-color: #a8a8a8 !important;
-    /* color: black !important; */
-  }
+body , html {
+  margin:0;
+  padding:0;
+  font-family: "Segoe UI", "Nirmala UI", sans-serif;
+}
+@font-face {
+  font-family: 'ShreeDev';
+  src: url('/fonts/SHREE-DEV-0709.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.shree-dev {
+  font-family: 'ShreeDev', sans-serif;
 }
 
 .modern-scrollbar::-webkit-scrollbar {
@@ -37,7 +45,7 @@
   background-color: rgba(100, 100, 255, 0.6);
 }
 
-.sub-heading {
+/* .sub-heading {
     @apply px-2 py-1 mb-2 text-xl font-bold uppercase bg-stone-200 ;
 }
 
@@ -58,4 +66,5 @@ li{
     .highlight-red {
         @apply text-red-500 font-bold;
     }
-}
+} */
+ 

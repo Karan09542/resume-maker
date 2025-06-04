@@ -30,8 +30,6 @@ const RasionInput = ({
   // const watchFamilyMembers = watch("familyMembers");
   const watchForm = watch();
 
- 
-
   const mapping = {
     mukhiya: "मुखिया",
     pati: "पिता/पति का नाम",
@@ -46,9 +44,8 @@ const RasionInput = ({
     pataId: "पता क्रमांक",
   };
   function onSubmit(data) {
-    console.log(data);
     setRasionData(data);
-    toast.success("Rasion added successfully");
+    setIsRasionInputOpen(false);
   }
 
   const inputList = [
@@ -88,9 +85,193 @@ const RasionInput = ({
   return (
     <div
       ref={formContainerRef}
+      style={{ maxHeight: "98vh", overflowY: "auto" }}
       className="max-h-[98vh] modern-scrollbar overflow-y-auto bg-gradient-to-t from-gray-900 to-gray-800 p-8"
     >
-      <label htmlFor="scale" className="text-white text-2xl">
+      <style jsx>
+        {`
+          /* General form styling */
+          .custom-form {
+            background-color: #1e293b; /* Dark background, adjust as needed */
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            -width: fit-content;
+            margin: 0 auto;
+          }
+
+          /* Reset button */
+          .bg-rose-500 {
+            background-color: #f43f5e;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+          }
+          .bg-rose-500:hover {
+            background-color: #e11d48;
+          }
+
+          /* Input grid */
+          .grid-cols-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            width: fit-content;
+          }
+          .w-fit {
+            width: fit-content;
+          }
+
+          /* Input fields */
+          .my-3 {
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+          }
+          .mb-3 {
+            margin-bottom: 0.75rem;
+          }
+          .mb-2 {
+            margin-bottom: 0.5rem;
+          }
+          .mt-6 {
+            margin-top: 1.5rem;
+          }
+          .gap-2 {
+            gap: 0.5rem;
+          }
+          .gap-3 {
+            gap: 0.75rem;
+          }
+
+          /* Input and select styling */
+          .border {
+            border: 1px solid #64748b;
+            border-radius: 0.25rem;
+          }
+          .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+          }
+          .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+          }
+          .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+          .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+          }
+          .outline-none {
+            outline: none;
+          }
+          .text-white {
+            color: #ffffff;
+          }
+          .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+          }
+          .text-rose-500 {
+            color: #f43f5e;
+          }
+          .text-yellow-500 {
+            color: #eab308;
+          }
+          .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+          }
+          .font-bold {
+            font-weight: 700;
+          }
+          .text-red-500 {
+            color: #ef4444;
+          }
+
+          /* Member card styling */
+          .flex {
+            display: flex;
+          }
+          .flex-col {
+            flex-direction: column;
+          }
+          .items-center {
+            align-items: center;
+          }
+          .justify-between {
+            justify-content: space-between;
+          }
+          .gap-x-2 {
+            column-gap: 0.5rem;
+          }
+          .p-2 {
+            padding: 0.5rem;
+          }
+          .rounded {
+            border-radius: 0.25rem;
+          }
+
+          /* Member remove button */
+          .text-red-600 {
+            color: #dc2626;
+          }
+          .border-red-600 {
+            border-color: #dc2626;
+          }
+          .w-fit {
+            width: fit-content;
+          }
+          .mt-1 {
+            margin-top: 0.25rem;
+          }
+
+          /* Submit and add member buttons */
+          .bg-blue-500 {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+          }
+          .bg-blue-500:hover {
+            background-color: #2563eb;
+          }
+          .bg-green-700 {
+            background-color: #15803d;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+          }
+          .bg-green-700:hover {
+            background-color: #166534;
+          }
+
+          /* Error message */
+          .text-red-500 {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+          }
+
+          /* Custom utility for select dropdown */
+          select.border {
+            background-color: #f8fafc;
+            color: #1e293b;
+          }
+        `}
+      </style>
+      {/* <label htmlFor="scale" className="text-white text-2xl">
         Rasion Scale up/down
       </label>
       <input
@@ -102,11 +283,10 @@ const RasionInput = ({
         max="1"
         step={"0.01"}
         className="w-full"
-      />
-      <form className="w-fit" onSubmit={handleSubmit(onSubmit)}>
+      /> */}
+      <form className="w-fit custom-form" onSubmit={handleSubmit(onSubmit)}>
         {/* reset button */}
         <div className="flex justify-between gap-3 mb-3">
-      
           <button
             type="reset"
             className="bg-rose-500 text-white px-4 py-2 rounded feeling-press"
@@ -117,11 +297,11 @@ const RasionInput = ({
           >
             Reset
           </button>
-          <RasionSwitch
+          {/* <RasionSwitch
             placeholder="Hint"
             isOn={isHint}
             onChange={() => setIsHint((prev) => !prev)}
-          />
+          /> */}
         </div>
         {/* input fields */}
         <div className="grid grid-cols-2 w-fit gap-2">

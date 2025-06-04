@@ -18,7 +18,7 @@ const RasionLeft = ({ scale, A4size }) => {
         </div>
         {/* family members */}
         <table
-          style={{ marginTop: `${20 * scale}`, fontSize: `${14 * scale}px` }}
+          style={{ marginTop: `${0.7 * scale}cm`, fontSize: `${14 * scale}px` }}
         >
           <tr
             style={{ lineHeight: `${2.5 * scale}` }}
