@@ -384,6 +384,7 @@ const RasionInput = ({
             >
               <option value="सामान्य परिवार">सामान्य परिवार</option>
               <option value="प्राथमिकता कार्ड">प्राथमिकता कार्ड</option>
+              <option value="अन्‍त्‍योदय कार्ड">अन्‍त्‍योदय कार्ड</option>
             </select>
           </div>
           <div className="flex flex-col border">
@@ -400,6 +401,7 @@ const RasionInput = ({
                 एपीएल (सामान्य परिवार)
               </option>
               <option value="प्राथमिकता कार्ड">प्राथमिकता कार्ड</option>
+              <option value="अन्‍त्‍योदय कार्ड">अन्‍त्‍योदय कार्ड</option>
             </select>
           </div>
 

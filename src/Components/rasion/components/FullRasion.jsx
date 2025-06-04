@@ -4,6 +4,7 @@ import { useRasionStore } from "../../../../Store/Resume";
 const FullRasion = () => {
   const rasionData = useRasionStore((state) => state.rasionData);
   const familyMembers = rasionData?.familyMembers || [];
+  const tableHeaders = ["स.क्र.", "नाम", "लिंग", "उम्र", "मुखिया से संबंध"];
   const handlePrint = () => {
     window.print();
   };
@@ -156,13 +157,13 @@ const FullRasion = () => {
 
               <table>
                 <thead>
-                  <tr>
-                    <th>स.क्र.</th>
-                    <th>नाम</th>
-                    <th>लिंग</th>
-                    <th>उम्र</th>
-                    <th>मुखिया से संबंध</th>
-                  </tr>
+                 <tr>
+                  {tableHeaders.map((header, index) => (
+                    <th key={header} style={{ minWidth: "46px" }}>
+                      {header}
+                    </th>
+                  ))}
+                 </tr>
                 </thead>
                 <tbody>
                   {familyMembers.map((member, index) => (
@@ -376,7 +377,7 @@ const FullRasion = () => {
               </h5>
 
               <h3 style={{ textAlign: "center" }}>
-                <span id="LabelCardType">अन्‍त्‍योदय कार्ड</span>
+                <span id="LabelCardType">{rasionData?.cardType ||'अन्‍त्‍योदय कार्ड'}</span>
               </h3>
             </div>
           </footer>
